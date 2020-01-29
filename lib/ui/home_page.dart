@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:jogo1/ui/start_page.dart';
 
@@ -9,58 +7,99 @@ class HomePage extends StatefulWidget{
 }
 
 class _HomePageState extends State<HomePage>{
-  String _texto = "texto";
-  int _valor=0;
+  TextEditingController nomeEdit = TextEditingController();
    @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Jogo Desafio"),
-        backgroundColor: Colors.red,
-        centerTitle: true,
-      ),
-      backgroundColor: Colors.white,
-      body: SingleChildScrollView(
-          padding: EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 0.0),
+      backgroundColor: Colors.blue,
+      body: Stack(
+        children: <Widget>[
+          Container(
+          decoration:  BoxDecoration(
+            image:  DecorationImage(
+              image: new AssetImage("images/bg.png"), 
+              fit: BoxFit.fill)
+              ),
+          ),
+          SingleChildScrollView(
+          padding: EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 10.0),
           child: Center(
             child: Column(
-              crossAxisAlignment:  CrossAxisAlignment.stretch,
               children: <Widget>[
-                RaisedButton(
-                  onPressed: _chamarTela,
-                  child: Text("texto button"),
-                  color: Colors.green,
+                Padding(
+                   padding: EdgeInsets.fromLTRB(10.0, 80.0, 10.0, 10.0),
                 ),
-                RaisedButton(
-                  onPressed: (){
-                      
-                      _chamarTela2();
-                  },
-                  child: Text("texto button2"),
-                  color: Colors.green,
+               Container(
+                  width: 180.0,
+                  height: 130.0,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage("images/logo1.png"),
+                   
+                  ),
                 ),
-                Text(
-                  _texto,
+               ),
+              Padding(
+                   padding: EdgeInsets.fromLTRB(0.0, 20.0, 0.0, 0.0),
+                ),
+              Text(
+                  "Qual o seu nome?",
                   textAlign: TextAlign.center,
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20, color: Colors.white),
                 ),
+               Padding(
+                  padding: EdgeInsets.fromLTRB(0.0, 20.0, 0.0, 0.0),
+                ),
+                TextField(
+                    style: TextStyle(fontSize: 22.0),
+                    controller: nomeEdit,
+                    decoration: InputDecoration(
+                      filled: true,
+                      fillColor: Colors.white,
+                      contentPadding:
+                          const EdgeInsets.only(left: 14.0, bottom: 8.0, top: 8.0),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white),
+                        borderRadius: BorderRadius.circular(25.7),
+                      ),
+                      enabledBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white),
+                        borderRadius: BorderRadius.circular(25.7),
+                      ),
+                    ),
+                ),
+              
+                SizedBox(
+                  width: 200,
+                  child: RaisedButton(
+                          onPressed: (){
+                            _chamarTela();
+                          },
+                          color: Colors.orange,
+                          shape: RoundedRectangleBorder(
+                                  borderRadius: new BorderRadius.circular(18.0),
+                                  side: BorderSide(color: Colors.red)
+                          ),
+                          child: Text("Avançar",
+                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20, color: Colors.black),),
+              
+                        ),
+                  ),
+               
               ],
             ),
           )
       ),
+        ],
+      )
     );
   }
 
-  void _chamarTela() async{
-     _valor+=await Navigator.push(context,
-                      MaterialPageRoute(builder: (context)=> StartPage()));
-      _texto = "teste $_valor";                
+  void _chamarTela() {
+      Navigator.push(context,
+                      MaterialPageRoute(builder: (context)=> StartPage(nomeJogador: nomeEdit.text)));
+                      
   }
-    void _chamarTela2() {
-     
-                      Navigator.pushReplacement(context,
-                      MaterialPageRoute(builder: (context)=> StartPage()));
-                     
-                  
-  }
+   
 
 }
