@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:jogo1/ui/start_page.dart';
+import 'package:jogo1/ui/drag_page.dart';
+import 'package:flutter/services.dart';
 
 class HomePage extends StatefulWidget{
   @override 
@@ -10,6 +11,10 @@ class _HomePageState extends State<HomePage>{
   TextEditingController nomeEdit = TextEditingController();
    @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+    ]
+    );
     return Scaffold(
       backgroundColor: Colors.blue,
       body: Stack(
@@ -97,7 +102,7 @@ class _HomePageState extends State<HomePage>{
 
   void _chamarTela() {
       Navigator.push(context,
-                      MaterialPageRoute(builder: (context)=> StartPage(nomeJogador: nomeEdit.text)));
+                      MaterialPageRoute(builder: (context)=> DragPage(nomeJogador: nomeEdit.text)));
                       
   }
    

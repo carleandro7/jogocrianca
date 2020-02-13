@@ -48,6 +48,9 @@ flutter:
     - images/bg.png
     - images/logo1.png
     - images/bg1.png
+    - images/noite.png
+    - images/praia.png
+    - images/dia.png
     
 
   # An image asset can refer to one or more resolution-specific "variants", see
